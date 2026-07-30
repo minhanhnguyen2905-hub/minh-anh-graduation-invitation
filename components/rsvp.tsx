@@ -90,11 +90,37 @@ export function Rsvp() {
             <p className="font-serif text-3xl italic text-foreground">
               Cảm ơn bạn!
             </p>
-            <p className="max-w-xs font-serif text-lg text-muted-foreground text-pretty">
-              {submitted === 'attend'
-                ? 'Thank you for being part of my special day 🤍\\n\\nSự hiện diện của bạn là món quà rất ý nghĩa đối với Minh Anh trong ngày đặc biệt này.\\n\\nNếu bạn di chuyển bằng xe máy, vui lòng gửi xe tại cổng phụ 04 Nguyễn Trãi, Phường Chợ Quán, TP. Hồ Chí Minh.\\n\\nĐể thoải mái hơn trong suốt buổi lễ, bạn nhớ mang theo quạt cầm tay nhé.\\n\\nHẹn gặp bạn vào 10:50 • 06.08.2026 tại Hội trường A – Đại học Sài Gòn.'
-                : 'Sự vắng mặt của bạn sẽ được nhớ đến rất nhiều.'}
-            </p>
+           <p className="max-w-sm font-serif text-base leading-relaxed text-muted-foreground text-center">
+  {submitted === 'attend' ? (
+    <>
+      <span className="font-medium text-foreground">
+        Thank you for being part of my special day 🤍
+      </span>
+
+      <br />
+      <br />
+
+      Sự hiện diện của bạn là món quà rất ý nghĩa đối với Minh Anh trong ngày đặc biệt này.
+
+      <br />
+      <br />
+
+      📍 Nếu bạn di chuyển bằng xe máy, vui lòng gửi xe tại cổng phụ 04 Nguyễn Trãi, Phường Chợ Quán, TP. Hồ Chí Minh.
+
+      <br />
+      <br />
+
+      🪭 Để thoải mái hơn trong suốt buổi lễ, bạn nhớ mang theo quạt cầm tay nhé.
+
+      <br />
+      <br />
+
+      ✨ Hẹn gặp bạn vào 10:50 • 06.08.2026 tại Hội trường A – Đại học Sài Gòn.
+    </>
+  ) : (
+    'Sự vắng mặt của bạn sẽ được nhớ đến rất nhiều. 🤍'
+  )}
+</p>
             <button
               type="button"
               onClick={() => setSubmitted(null)}
