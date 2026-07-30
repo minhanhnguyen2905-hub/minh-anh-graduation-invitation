@@ -90,7 +90,7 @@ export function Rsvp() {
             <p className="font-serif text-3xl italic text-foreground">
               Cảm ơn bạn!
             </p>
-           <p className="max-w-sm font-serif text-base leading-relaxed text-muted-foreground text-center">
+           <p className="max-w-md font-serif text-sm leading-7 text-muted-foreground text-center whitespace-pre-line px-2">
   {submitted === 'attend' ? (
     <>
       <span className="font-medium text-foreground">
