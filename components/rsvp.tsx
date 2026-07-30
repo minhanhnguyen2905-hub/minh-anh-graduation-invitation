@@ -110,12 +110,12 @@ export function Rsvp() {
       <br />
       <br />
 
-      🪭 Để thoải mái hơn trong suốt buổi lễ, bạn nhớ mang theo quạt cầm tay nhé.
+       Để thoải mái hơn trong suốt buổi lễ, bạn nhớ mang theo quạt cầm tay nhé.
 
       <br />
       <br />
 
-      ✨ Hẹn gặp bạn vào 10:50 • 06.08.2026 tại Hội trường A – Đại học Sài Gòn.
+       Hẹn gặp bạn vào 10:50 • 06.08.2026 tại Hội trường A – Đại học Sài Gòn.
     </>
   ) : (
     'Sự vắng mặt của bạn sẽ được nhớ đến rất nhiều. 🤍'
