@@ -24,32 +24,32 @@ export function Venue() {
         </h3>
       </Reveal>
 
-     <Reveal delay={120}>
-  <div className="glass rounded-[2rem] p-6 sm:p-8">
-    <div className="space-y-5 font-serif text-sm leading-7 text-muted-foreground">
-      <div className="space-y-2">
-        <p className="text-base font-semibold uppercase tracking-[0.18em] text-primary">
-          🏛️ Từ cổng số 4 Nguyễn Trãi
-        </p>
-        <p>
-          Chạy thẳng vào bên trong trường, đến khu vực gần <strong>khu E</strong>
-          sẽ có lối đi dẫn sang <strong>khu A</strong>. Đi tiếp theo lối này là
-          sẽ đến <strong>Hội trường A</strong>.
-        </p>
-      </div>
+           <Reveal delay={120}>
+        <div className="glass rounded-[2rem] p-6 sm:p-8">
+          <div className="space-y-5 font-serif text-sm leading-7 text-muted-foreground">
+            <div className="space-y-2">
+              <p className="text-base font-semibold uppercase tracking-[0.18em] text-primary">
+                Từ cổng số 4 Nguyễn Trãi
+              </p>
+              <p>
+                Chạy thẳng vào bên trong trường, đến khu vực gần <span className="font-semibold text-foreground">khu E</span>
+                sẽ có lối đi dẫn sang <span className="font-semibold text-foreground">khu A</span>.
+                Đi tiếp theo lối này là sẽ đến <span className="font-semibold text-foreground">Hội trường A</span>.
+              </p>
+            </div>
 
-      <div className="space-y-2 border-t border-primary/10 pt-4">
-        <p className="text-base font-semibold uppercase tracking-[0.18em] text-primary">
-          🏛️ Từ cổng ADV
-        </p>
-        <p>
-          Đi thẳng đến cuối đường sẽ thấy <strong>khu A</strong>,<br />
-          <strong>Hội trường A nằm bên tay trái</strong>.
-        </p>
-      </div>
-    </div>
-  </div>
-</Reveal>
+            <div className="space-y-2 border-t border-primary/10 pt-4">
+              <p className="text-base font-semibold uppercase tracking-[0.18em] text-primary">
+                Từ cổng ADV
+              </p>
+              <p>
+                Đi thẳng đến cuối đường sẽ thấy <span className="font-semibold text-foreground">khu A</span>.<br />
+                <span className="font-semibold text-foreground">Hội trường A nằm bên tay trái</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Reveal>
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`}
           target="_blank"
