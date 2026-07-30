@@ -134,11 +134,16 @@ export function Rsvp() {
             <div className="grid gap-3 pt-2 sm:grid-cols-2">
               <button
                 type="button"
-                onClick={() => submit('attend')}
+                onClick={() =>
+  window.open(
+    "https://forms.gle/uLcxiS6od2zMbudX9",
+    "_blank"
+  )
+}
                 className="flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-sm uppercase tracking-[0.15em] text-primary-foreground shadow-[0_16px_36px_-20px_var(--primary)] transition-all duration-300 hover:scale-[1.02]"
               >
                 <span aria-hidden className="text-base">💛</span>
-                Mình sẽ tham dự
+                I will attend
               </button>
               <button
                 type="button"
@@ -146,7 +151,7 @@ export function Rsvp() {
                 className="flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-transparent px-6 py-4 text-sm uppercase tracking-[0.15em] text-foreground/80 transition-all duration-300 hover:scale-[1.02] hover:bg-secondary"
               >
                 <span aria-hidden className="text-base">🤍</span>
-                Rất tiếc mình không thể
+                Sorry. I can't attend
               </button>
             </div>
           </div>
