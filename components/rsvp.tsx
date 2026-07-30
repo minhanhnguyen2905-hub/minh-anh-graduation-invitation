@@ -92,7 +92,7 @@ export function Rsvp() {
             </p>
             <p className="max-w-xs font-serif text-lg text-muted-foreground text-pretty">
               {submitted === 'attend'
-                ? 'Hẹn gặp bạn vào ngày 06.08.2026.'
+                ? 'Thank you for being part of my special day 🤍\\n\\nSự hiện diện của bạn là món quà rất ý nghĩa đối với Minh Anh trong ngày đặc biệt này.\\n\\nNếu bạn di chuyển bằng xe máy, vui lòng gửi xe tại cổng phụ 04 Nguyễn Trãi, Phường Chợ Quán, TP. Hồ Chí Minh.\\n\\nĐể thoải mái hơn trong suốt buổi lễ, bạn nhớ mang theo quạt cầm tay nhé.\\n\\nHẹn gặp bạn vào 10:50 • 06.08.2026 tại Hội trường A – Đại học Sài Gòn.'
                 : 'Sự vắng mặt của bạn sẽ được nhớ đến rất nhiều.'}
             </p>
             <button
