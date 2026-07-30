@@ -24,64 +24,32 @@ export function Venue() {
         </h3>
       </Reveal>
 
-      <Reveal delay={120}>
-        <div className="glass overflow-hidden rounded-[2rem] p-3">
-          <div className="relative aspect-video overflow-hidden rounded-[1.4rem]">
-            <Image
-              src="/images/venue.png"
-              alt="Saigon University Hall A auditorium"
-              fill
-              className={cn(
-                'object-cover transition-transform duration-700',
-                playing ? 'scale-105' : 'scale-100',
-              )}
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                background:
-                  'linear-gradient(to top, color-mix(in oklch, var(--foreground) 55%, transparent), transparent 55%)',
-              }}
-            />
+     <Reveal delay={120}>
+  <div className="glass rounded-[2rem] p-6 sm:p-8">
+    <div className="space-y-5 font-serif text-sm leading-7 text-muted-foreground">
+      <div className="space-y-2">
+        <p className="text-base font-semibold uppercase tracking-[0.18em] text-primary">
+          🏛️ Từ cổng số 4 Nguyễn Trãi
+        </p>
+        <p>
+          Chạy thẳng vào bên trong trường, đến khu vực gần <strong>khu E</strong>
+          sẽ có lối đi dẫn sang <strong>khu A</strong>. Đi tiếp theo lối này là
+          sẽ đến <strong>Hội trường A</strong>.
+        </p>
+      </div>
 
-            {!playing ? (
-              <button
-                type="button"
-                onClick={() => setPlaying(true)}
-                aria-label="Play campus guide video"
-                className="absolute inset-0 flex flex-col items-center justify-center gap-4"
-              >
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-warm-white/85 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] backdrop-blur transition-transform duration-300 hover:scale-110">
-                  <Play className="ml-1 h-8 w-8 text-primary" fill="currentColor" />
-                </span>
-                <span className="text-sm uppercase tracking-[0.35em] text-warm-white drop-shadow">
-                  Play Campus Guide
-                </span>
-              </button>
-            ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-foreground/70 text-center backdrop-blur-sm">
-                <span className="animate-pulse text-sm uppercase tracking-[0.35em] text-warm-white">
-                  Campus guide video coming soon
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setPlaying(false)}
-                  className="rounded-full border border-warm-white/50 px-5 py-2 text-xs uppercase tracking-[0.3em] text-warm-white transition-colors hover:bg-warm-white/10"
-                >
-                  Close
-                </button>
-              </div>
-            )}
-
-            <span className="absolute bottom-4 left-5 font-serif text-xl text-warm-white drop-shadow">
-              Hall A · Saigon University
-            </span>
-          </div>
-        </div>
-      </Reveal>
-
-      <Reveal delay={200} className="mt-8 flex justify-center">
+      <div className="space-y-2 border-t border-primary/10 pt-4">
+        <p className="text-base font-semibold uppercase tracking-[0.18em] text-primary">
+          🏛️ Từ cổng ADV
+        </p>
+        <p>
+          Đi thẳng đến cuối đường sẽ thấy <strong>khu A</strong>,<br />
+          <strong>Hội trường A nằm bên tay trái</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</Reveal>
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`}
           target="_blank"
