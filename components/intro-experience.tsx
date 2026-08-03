@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { useAudio } from './audio-provider'
 
 type Stage = 'envelope' | 'opening' | 'message'
 
@@ -9,12 +10,10 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
   const [stage, setStage] = useState<Stage>('envelope')
   const [leaving, setLeaving] = useState(false)
   const paperSoundRef = useRef<HTMLAudioElement>(null)
-  const bgMusicRef = useRef<HTMLAudioElement>(null)
+  const { startBackgroundMusic } = useAudio()
 
   function openEnvelope() {
-    setStage('opening')
-    
-    // Play paper opening sound (60% volume)
+    // Play paper opening sound immediately (60% volume)
     if (paperSoundRef.current) {
       paperSoundRef.current.volume = 0.6
       paperSoundRef.current.currentTime = 0
@@ -22,18 +21,16 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
         // Fail silently if audio fails to play
       })
     }
-    
-    // Start background music after paper sound (40% volume, loop)
+
+    // Start animation at almost the same time (50ms delay for natural feel)
     window.setTimeout(() => {
-      if (bgMusicRef.current) {
-        bgMusicRef.current.volume = 0.4
-        bgMusicRef.current.currentTime = 0
-        bgMusicRef.current.loop = true
-        bgMusicRef.current.play().catch(() => {
-          // Fail silently if audio fails to play
-        })
-      }
-    }, 600)
+      setStage('opening')
+    }, 50)
+
+    // Start background music when paper sound ends (approximately 1.2-1.5s in)
+    window.setTimeout(() => {
+      startBackgroundMusic()
+    }, 1500)
     
     // Paper slides up with smooth 700ms transition, then the first message appears.
     window.setTimeout(() => setStage('message'), 2000)
@@ -49,12 +46,9 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
         leaving ? 'pointer-events-none opacity-0' : 'opacity-100',
       )}
     >
-      {/* Hidden audio elements - no UI controls shown */}
+      {/* Hidden paper sound audio element - no UI controls shown */}
       <audio ref={paperSoundRef} preload="auto">
         <source src="/audio/sound-sot-tot-nghiep.mp3" type="audio/mpeg" />
-      </audio>
-      <audio ref={bgMusicRef} preload="auto">
-        <source src="/audio/piano-tot-nghiep.mp3" type="audio/mpeg" />
       </audio>
       
       {/* soft ambient glow */}
