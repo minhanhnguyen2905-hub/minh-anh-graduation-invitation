@@ -1,18 +1,39 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { useAudio } from './audio-provider'
 
 type Stage = 'envelope' | 'opening' | 'message'
 
 export function IntroExperience({ onFinish }: { onFinish: () => void }) {
   const [stage, setStage] = useState<Stage>('envelope')
   const [leaving, setLeaving] = useState(false)
+  const paperSoundRef = useRef<HTMLAudioElement>(null)
+  const { startBackgroundMusic } = useAudio()
 
   function openEnvelope() {
-    setStage('opening')
-    // Paper slides up, then the first message appears.
-    window.setTimeout(() => setStage('message'), 1800)
+    // Play paper opening sound immediately (60% volume)
+    if (paperSoundRef.current) {
+      paperSoundRef.current.volume = 0.6
+      paperSoundRef.current.currentTime = 0
+      paperSoundRef.current.play().catch(() => {
+        // Fail silently if audio fails to play
+      })
+    }
+
+    // Start animation at almost the same time (50ms delay for natural feel)
+    window.setTimeout(() => {
+      setStage('opening')
+    }, 50)
+
+    // Start background music when paper sound ends (approximately 1.2-1.5s in)
+    window.setTimeout(() => {
+      startBackgroundMusic()
+    }, 1500)
+    
+    // Paper slides up with smooth 700ms transition, then the first message appears.
+    window.setTimeout(() => setStage('message'), 2000)
     // Hold the message, then hand off to the invitation.
     window.setTimeout(() => setLeaving(true), 4600)
     window.setTimeout(() => onFinish(), 5400)
@@ -25,6 +46,11 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
         leaving ? 'pointer-events-none opacity-0' : 'opacity-100',
       )}
     >
+      {/* Hidden paper sound audio element - no UI controls shown */}
+      <audio ref={paperSoundRef} preload="auto">
+        <source src="/audio/sound-sot-tot-nghiep.mp3" type="audio/mpeg" />
+      </audio>
+      
       {/* soft ambient glow */}
       <div
         aria-hidden
@@ -122,7 +148,7 @@ function Envelope({
         {/* The letter that slides up when opening */}
         <div
           className={cn(
-            'absolute left-1/2 top-4 h-[88%] w-[86%] -translate-x-1/2 rounded-lg bg-warm-white shadow-md transition-all duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
+            'absolute left-1/2 top-4 h-[88%] w-[86%] -translate-x-1/2 rounded-lg bg-warm-white shadow-md transition-all duration-700 ease-out',
             opening ? '-translate-y-44 opacity-100' : 'translate-y-0 opacity-0',
           )}
         >

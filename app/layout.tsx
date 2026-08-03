@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, Jost } from 'next/font/google'
+import { AudioProvider } from '@/components/audio-provider'
 import './globals.css'
 
 const serif = Cormorant_Garamond({
@@ -39,8 +40,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable} bg-background`}>
       <body className="font-sans antialiased">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <AudioProvider>
+          {children}
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </AudioProvider>
       </body>
     </html>
   )
