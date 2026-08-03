@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 type Stage = 'envelope' | 'opening' | 'message'
@@ -8,9 +8,33 @@ type Stage = 'envelope' | 'opening' | 'message'
 export function IntroExperience({ onFinish }: { onFinish: () => void }) {
   const [stage, setStage] = useState<Stage>('envelope')
   const [leaving, setLeaving] = useState(false)
+  const paperSoundRef = useRef<HTMLAudioElement>(null)
+  const bgMusicRef = useRef<HTMLAudioElement>(null)
 
   function openEnvelope() {
     setStage('opening')
+    
+    // Play paper opening sound (60% volume)
+    if (paperSoundRef.current) {
+      paperSoundRef.current.volume = 0.6
+      paperSoundRef.current.currentTime = 0
+      paperSoundRef.current.play().catch(() => {
+        // Fail silently if audio fails to play
+      })
+    }
+    
+    // Start background music after paper sound (40% volume, loop)
+    window.setTimeout(() => {
+      if (bgMusicRef.current) {
+        bgMusicRef.current.volume = 0.4
+        bgMusicRef.current.currentTime = 0
+        bgMusicRef.current.loop = true
+        bgMusicRef.current.play().catch(() => {
+          // Fail silently if audio fails to play
+        })
+      }
+    }, 500)
+    
     // Paper slides up, then the first message appears.
     window.setTimeout(() => setStage('message'), 1800)
     // Hold the message, then hand off to the invitation.
@@ -25,6 +49,14 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
         leaving ? 'pointer-events-none opacity-0' : 'opacity-100',
       )}
     >
+      {/* Hidden audio elements - no UI controls shown */}
+      <audio ref={paperSoundRef} preload="auto">
+        <source src="/audio/sound-sot-tot-nghiep.mp3" type="audio/mpeg" />
+      </audio>
+      <audio ref={bgMusicRef} preload="auto">
+        <source src="/audio/piano-tot-nghiep.mp3" type="audio/mpeg" />
+      </audio>
+      
       {/* soft ambient glow */}
       <div
         aria-hidden

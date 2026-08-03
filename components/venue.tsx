@@ -21,25 +21,23 @@ export function Venue() {
 
       <Reveal delay={120}>
         <div className="glass rounded-[2rem] p-6 sm:p-8">
-          <div className="space-y-6 font-serif text-sm leading-7 text-muted-foreground">
-            <div className="space-y-2">
-              <p className="text-base font-semibold uppercase tracking-[0.18em] text-primary">
+          <div className="space-y-6 font-serif text-sm leading-8 text-muted-foreground">
+            <div className="space-y-3">
+              <p className="text-base font-normal tracking-wide text-primary capitalize">
                 Từ cổng số 4 Nguyễn Trãi
               </p>
-              <p>
-                Chạy thẳng vào bên trong trường, đến khu vực gần <span className="font-semibold text-foreground">khu E</span>
-                sẽ có lối đi dẫn sang <span className="font-semibold text-foreground">khu A</span>.
-                Đi tiếp theo lối này là sẽ đến <span className="font-semibold text-foreground">Hội trường A</span>.
+              <p className="text-foreground/80">
+                Chạy thẳng vào bên trong trường, đến khu vực gần khu E sẽ có lối đi dẫn sang khu A. Đi tiếp theo lối này là sẽ đến Hội trường A.
               </p>
             </div>
 
-            <div className="border-t border-primary/10 pt-5 space-y-2">
-              <p className="text-base font-semibold uppercase tracking-[0.18em] text-primary">
+            <div className="border-t border-primary/10 pt-5 space-y-3">
+              <p className="text-base font-normal tracking-wide text-primary capitalize">
                 Từ cổng ADV
               </p>
-              <p>
-                Đi thẳng đến cuối đường sẽ thấy <span className="font-semibold text-foreground">khu A</span>.<br />
-                <span className="font-semibold text-foreground">Hội trường A nằm bên tay trái</span>.
+              <p className="text-foreground/80">
+                Đi thẳng đến cuối đường sẽ thấy khu A.<br />
+                Hội trường A nằm bên tay trái.
               </p>
             </div>
           </div>
