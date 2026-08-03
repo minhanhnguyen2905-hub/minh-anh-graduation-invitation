@@ -33,10 +33,10 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
           // Fail silently if audio fails to play
         })
       }
-    }, 500)
+    }, 600)
     
-    // Paper slides up, then the first message appears.
-    window.setTimeout(() => setStage('message'), 1800)
+    // Paper slides up with smooth 700ms transition, then the first message appears.
+    window.setTimeout(() => setStage('message'), 2000)
     // Hold the message, then hand off to the invitation.
     window.setTimeout(() => setLeaving(true), 4600)
     window.setTimeout(() => onFinish(), 5400)
@@ -154,7 +154,7 @@ function Envelope({
         {/* The letter that slides up when opening */}
         <div
           className={cn(
-            'absolute left-1/2 top-4 h-[88%] w-[86%] -translate-x-1/2 rounded-lg bg-warm-white shadow-md transition-all duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
+            'absolute left-1/2 top-4 h-[88%] w-[86%] -translate-x-1/2 rounded-lg bg-warm-white shadow-md transition-all duration-700 ease-out',
             opening ? '-translate-y-44 opacity-100' : 'translate-y-0 opacity-0',
           )}
         >

@@ -4,12 +4,12 @@ import Image from 'next/image'
 import { Reveal } from '@/components/reveal'
 
 const IMAGES = [
-  { src: '/images/gallery-1.png', alt: 'Walking across campus in graduation gown', ratio: 'aspect-[3/4]' },
-  { src: '/images/gallery-2.png', alt: 'Holding a diploma with a sage ribbon', ratio: 'aspect-square' },
-  { src: '/images/gallery-6.png', alt: 'Cherry blossom branches against warm sky', ratio: 'aspect-[4/5]' },
-  { src: '/images/gallery-4.png', alt: 'Celebrating with graduation cap', ratio: 'aspect-square' },
-  { src: '/images/gallery-3.png', alt: 'Graduation cap and blush flowers flat lay', ratio: 'aspect-[3/4]' },
-  { src: '/images/gallery-5.png', alt: 'Saigon University building among sage trees', ratio: 'aspect-[4/5]' },
+  { src: '/images/gallery-1.png', alt: 'Graduation portrait in hallway', ratio: 'aspect-[3/4]' },
+  { src: '/images/gallery-2.png', alt: 'Graduation portrait with diploma sash', ratio: 'aspect-square' },
+  { src: '/images/gallery-6.png', alt: 'Graduation celebration with city skyline', ratio: 'aspect-[4/5]' },
+  { src: '/images/gallery-4.png', alt: 'Graduation portrait in grand hallway', ratio: 'aspect-square' },
+  { src: '/images/gallery-3.png', alt: 'Graduation portrait with elegant doors', ratio: 'aspect-[3/4]' },
+  { src: '/images/gallery-5.png', alt: 'Graduation celebration outdoors', ratio: 'aspect-[4/5]' },
 ]
 
 export function Gallery() {
@@ -37,6 +37,8 @@ export function Gallery() {
                   src={img.src || '/placeholder.svg'}
                   alt={img.alt}
                   fill
+                  quality={95}
+                  priority={false}
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   sizes="(max-width: 768px) 50vw, 33vw"
                 />

@@ -1,7 +1,6 @@
 'use client'
 
 import { Reveal } from '@/components/reveal'
-import { QRCodeComponent } from '@/components/qr-code'
 
 export function Ending() {
   return (
@@ -39,12 +38,6 @@ export function Ending() {
           <p className="mx-auto mt-8 max-w-xs text-xs font-light leading-relaxed tracking-wide text-muted-foreground/60 text-pretty">
             Thank you for being part of this special milestone.
           </p>
-        </Reveal>
-
-        <Reveal delay={400} className="mt-20">
-          <div className="flex justify-center">
-            <QRCodeComponent />
-          </div>
         </Reveal>
       </div>
     </section>
