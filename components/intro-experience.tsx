@@ -9,34 +9,39 @@ type Stage = 'envelope' | 'opening' | 'message'
 export function IntroExperience({ onFinish }: { onFinish: () => void }) {
   const [stage, setStage] = useState<Stage>('envelope')
   const [leaving, setLeaving] = useState(false)
+  const [opened, setOpened] = useState(false)
   const paperSoundRef = useRef<HTMLAudioElement>(null)
   const { startBackgroundMusic } = useAudio()
 
-  function openEnvelope() {
-    // Play paper opening sound immediately (60% volume)
-    if (paperSoundRef.current) {
-      paperSoundRef.current.volume = 0.6
-      paperSoundRef.current.currentTime = 0
-      paperSoundRef.current.play().catch(() => {
-        // Fail silently if audio fails to play
-      })
-    }
+  async function openEnvelope() {
+    if (opened) return
 
-    // Start animation at almost the same time (50ms delay for natural feel)
-    window.setTimeout(() => {
+    setOpened(true)
+
+    try {
+      // Play paper opening sound immediately (60% volume)
+      if (paperSoundRef.current) {
+        paperSoundRef.current.currentTime = 0
+        paperSoundRef.current.volume = 0.6
+        await paperSoundRef.current.play()
+      }
+
+      // Start animation immediately
       setStage('opening')
-    }, 50)
 
-    // Start background music when paper sound ends (approximately 1.2-1.5s in)
-    window.setTimeout(() => {
-      startBackgroundMusic()
-    }, 1500)
-    
-    // Paper slides up with smooth 700ms transition, then the first message appears.
-    window.setTimeout(() => setStage('message'), 2000)
-    // Hold the message, then hand off to the invitation.
-    window.setTimeout(() => setLeaving(true), 4600)
-    window.setTimeout(() => onFinish(), 5400)
+      // Start background music after paper sound (~700ms)
+      setTimeout(async () => {
+        startBackgroundMusic()
+      }, 700)
+      
+      // Paper slides up with smooth 700ms transition, then the first message appears.
+      window.setTimeout(() => setStage('message'), 2000)
+      // Hold the message, then hand off to the invitation.
+      window.setTimeout(() => setLeaving(true), 4600)
+      window.setTimeout(() => onFinish(), 5400)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -58,6 +63,7 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
         style={{
           background:
             'radial-gradient(circle at 50% 40%, color-mix(in oklch, var(--gold) 16%, transparent), transparent 60%)',
+          pointerEvents: 'none',
         }}
       />
 
@@ -167,6 +173,7 @@ function Envelope({
           style={{
             transform: opening ? 'rotateX(180deg)' : 'rotateX(0deg)',
             zIndex: opening ? 0 : 20,
+            pointerEvents: 'none',
           }}
         >
           <div
@@ -184,11 +191,13 @@ function Envelope({
         <button
           type="button"
           onClick={onSealClick}
-          onTouchStart={onSealClick}
-          onPointerDown={onSealClick}
+          onTouchStart={(e) => {
+            e.preventDefault()
+            onSealClick()
+          }}
           aria-label="Open the invitation"
           className={cn(
-            'absolute left-1/2 top-[42%] z-50 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-500 cursor-pointer touch-manipulation pointer-events-auto sm:h-20 sm:w-20',
+            'absolute left-1/2 top-[42%] z-50 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-500 sm:h-20 sm:w-20',
             opening
               ? 'scale-0 opacity-0'
               : 'scale-100 opacity-100 hover:scale-110 active:scale-95 animate-float-slow',
@@ -198,6 +207,11 @@ function Envelope({
               'radial-gradient(circle at 35% 30%, color-mix(in oklch, var(--gold) 82%, white), var(--primary) 70%)',
             boxShadow:
               '0 10px 24px -8px rgba(120,90,30,0.6), inset 0 2px 6px rgba(255,255,255,0.4)',
+            touchAction: 'manipulation',
+            WebkitTapHighlightColor: 'transparent',
+            pointerEvents: 'auto',
+            cursor: 'pointer',
+            position: 'relative',
           }}
         >
           <span className="font-serif text-2xl italic text-primary-foreground">
