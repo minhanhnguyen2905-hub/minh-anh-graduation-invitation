@@ -47,7 +47,7 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
   return (
     <div
       className={cn(
-        'fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-ivory px-6 transition-opacity duration-700',
+        'fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-ivory px-6 transition-opacity duration-700 ios-safe',
         leaving ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100',
       )}
     >
@@ -193,13 +193,18 @@ function Envelope({
           onClick={onSealClick}
           onTouchStart={(e) => {
             e.preventDefault()
+            e.stopPropagation()
             onSealClick()
+          }}
+          onTouchEnd={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
           }}
           aria-label="Open the invitation"
           className={cn(
             'absolute left-1/2 top-[42%] z-50 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-500 sm:h-20 sm:w-20',
             opening
-              ? 'scale-0 opacity-0'
+              ? 'scale-0 opacity-0 pointer-events-none'
               : 'scale-100 opacity-100 hover:scale-110 active:scale-95 animate-float-slow',
           )}
           style={{
@@ -209,12 +214,14 @@ function Envelope({
               '0 10px 24px -8px rgba(120,90,30,0.6), inset 0 2px 6px rgba(255,255,255,0.4)',
             touchAction: 'manipulation',
             WebkitTapHighlightColor: 'transparent',
-            pointerEvents: 'auto',
-            cursor: 'pointer',
+            pointerEvents: opening ? 'none' : 'auto',
+            cursor: opening ? 'default' : 'pointer',
             position: 'relative',
+            WebkitUserSelect: 'none',
+            userSelect: 'none',
           }}
         >
-          <span className="font-serif text-2xl italic text-primary-foreground">
+          <span className="font-serif text-2xl italic text-primary-foreground pointer-events-none">
             MA
           </span>
         </button>
