@@ -91,6 +91,12 @@
     font-family: var(--font-serif);
   }
 
+  /* Mobile touch optimization */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   /* Soft glass panels */
   .glass {
     background: color-mix(in oklch, var(--warm-white) 62%, transparent);
