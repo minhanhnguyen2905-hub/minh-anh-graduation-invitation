@@ -43,7 +43,7 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
     <div
       className={cn(
         'fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-ivory px-6 transition-opacity duration-700',
-        leaving ? 'pointer-events-none opacity-0' : 'opacity-100',
+        leaving ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100',
       )}
     >
       {/* Hidden paper sound audio element - no UI controls shown */}
@@ -63,7 +63,7 @@ export function IntroExperience({ onFinish }: { onFinish: () => void }) {
 
       {/* -------- Envelope stages -------- */}
       {(stage === 'envelope' || stage === 'opening') && (
-        <div className="animate-fade-in relative z-10 flex flex-col items-center">
+        <div className="animate-fade-in pointer-events-auto relative z-10 flex flex-col items-center">
           <Envelope opening={stage === 'opening'} onSealClick={openEnvelope} />
           <p
             className={cn(
@@ -111,7 +111,7 @@ function Envelope({
   onSealClick: () => void
 }) {
   return (
-    <div className="relative [perspective:1600px]">
+    <div className="pointer-events-auto relative [perspective:1600px]">
       <div
         className={cn(
           'relative h-56 w-80 transition-transform duration-700 ease-out sm:h-64 sm:w-[26rem]',
@@ -184,9 +184,11 @@ function Envelope({
         <button
           type="button"
           onClick={onSealClick}
+          onTouchStart={onSealClick}
+          onPointerDown={onSealClick}
           aria-label="Open the invitation"
           className={cn(
-            'absolute left-1/2 top-[42%] z-30 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-500 sm:h-20 sm:w-20',
+            'absolute left-1/2 top-[42%] z-50 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-500 cursor-pointer touch-manipulation pointer-events-auto sm:h-20 sm:w-20',
             opening
               ? 'scale-0 opacity-0'
               : 'scale-100 opacity-100 hover:scale-110 active:scale-95 animate-float-slow',
